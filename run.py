@@ -85,19 +85,20 @@ def parse_path(path, path_crit_length, path_warn_length, report):
     """Walks the specified directory and checks the lengths of all files and
     sub-directories within it."""
     crit_count, warn_count, total_count = 0, 0, 0
+    dir_sep = "\\" if os.name == "nt" else "/"
     start_time = dt.now()
     # Initiate report if requested
     if report:
         file_out = "files-to-review.csv"
         with open(file_out, "w") as file:
             file.write("level,length, path\n")
-    for item in os.walk(os.path.expanduser(path) + "/"):
+    for item in os.walk(os.path.expanduser(path) + dir_sep):
         folder = item[0]
         files = item[-1]
         log.debug("Parsing files in directory: %s", folder)
         for file in files:
             log.debug("Parsing file: %s", file)
-            abs_path = os.path.abspath(folder) + "/"
+            abs_path = os.path.abspath(folder) + dir_sep
             full_path = abs_path + file
             if len(full_path) >= path_crit_length:
                 log.critical("[Length %s] %s", len(full_path), full_path)
