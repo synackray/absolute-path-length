@@ -121,6 +121,8 @@ def parse_path(path, path_crit_length, path_warn_length, report):
         "critical matches.",
         total_count, warn_count, crit_count
         )
+    if report:
+        log.info("Saved report to 'file-to-review.csv'.")
 
 
 if __name__ == "__main__":
