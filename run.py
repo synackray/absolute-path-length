@@ -90,7 +90,7 @@ def parse_path(path, path_crit_length, path_warn_length, report):
     # Initiate report if requested
     if report:
         file_out = "files-to-review.csv"
-        with open(file_out, "w") as file:
+        with open(file_out, "w", encoding="utf-8") as file:
             file.write("level,length, path\n")
     for item in os.walk(os.path.expanduser(path) + dir_sep):
         folder = item[0]
@@ -104,13 +104,13 @@ def parse_path(path, path_crit_length, path_warn_length, report):
                 log.critical("[Length %s] %s", len(full_path), full_path)
                 crit_count += 1
                 if report:
-                    with open(file_out, "a") as f:
+                    with open(file_out, "a", encoding="utf-8") as f:
                         f.write(f'critical,{len(full_path)},"{full_path}"\n')
             elif len(full_path) >= path_warn_length:
                 log.warning("[Length %s] %s", len(full_path), full_path)
                 warn_count += 1
                 if report:
-                    with open(file_out, "a") as f:
+                    with open(file_out, "a", encoding="utf-8") as f:
                         f.write(f'warning,{len(full_path)},"{full_path}"\n')
             else:
                 log.debug("[Length %s] %s", len(full_path), full_path)
