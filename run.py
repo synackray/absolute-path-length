@@ -65,7 +65,7 @@ def main():
     # Adjusts logging if requested
     if args.logging:
         log_file = RotatingFileHandler(
-            filename=f"{os.getcwd().split('/')[-1]}.log",
+            filename="{}.log".format(os.getcwd().split('/')[-1]),
             maxBytes=10 * 1024 * 1024,  # Bytes to Megabytes
             backupCount=5
             )
